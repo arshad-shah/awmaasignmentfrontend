@@ -55,6 +55,7 @@ export default function Menu({ user }) {
 					Assignment 2
 				</Typography>
 				<Toolbar>
+					{user ? (
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
@@ -64,6 +65,7 @@ export default function Menu({ user }) {
 					>
 						{!mobileOpen ? <MenuIcon /> : <Close/>}
 					</IconButton>
+					): null }
 					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 						{navItems.map((item) => (
 							<Button key={item} sx={{ color: '#000' }} onClick={
