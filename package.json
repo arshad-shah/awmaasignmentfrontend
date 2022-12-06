@@ -2,7 +2,8 @@
   "name": "awmaasignmentfrontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy" : "https://www.arshaddhah.online", 
+  "homepage": "https://awmassignment.arshaddhah.com",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
