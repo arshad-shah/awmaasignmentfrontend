@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.leaflet-container {
+  width: 100vw;
+  height: calc(100vh - 66px);
+}
+
+.leaflet-top{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.leaflet-control > * {
+  padding: 0;
+  margin: 0;
+}
+
+.leaflet-control {
+  padding: 8px;
+  margin: 8px;
+}
