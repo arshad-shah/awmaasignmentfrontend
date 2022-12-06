@@ -1,6 +1,0 @@
-types{
-  text/html           html shtml htm;
-  text/css            css;
-  text/javascript     js;
-  media/image         gif jpg jpeg png ico;
-}

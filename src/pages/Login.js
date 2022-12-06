@@ -96,7 +96,7 @@ function Login({ isMobile, setUser }) {
                     </FormControl>
                     {handleLoginError()}
                     <Button variant="contained" color="secondary" onClick={handleSubmit} fullWidth>Login</Button>
-                    <p style={{marginTop: '10px'}}>Don't have an account? <a href="/signUp">Sign up</a></p>
+                    <p style={{marginTop: '10px'}}>Don't have an account? <a href="/signup">Signup</a></p>
 
                 </form>
             </Box>

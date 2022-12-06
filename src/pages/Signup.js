@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState} from 'react';
 import {
     Box,
@@ -68,8 +69,8 @@ function Signup({ isMobile }) {
     const handlePasswordStrength = () => {
         const weakPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
         const mediumPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
-        const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[(){}\[\]<>])(?=.{8,})/;
-        const veryStrongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[(){}\[\]<>])(?=.*[\-\_\=\+])(?=.{8,})/;
+        const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[(){}[\]<>])(?=.{8,})/;
+        const veryStrongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[(){}[\]<>])(?=.*[-_=+])(?=.{8,})/;
 
         let message = "Password strength:";
         let severity = "info";
@@ -101,7 +102,6 @@ function Signup({ isMobile }) {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [isTheTokenExpired, setIsTheTokenExpired] = useState(false);
     const [showUserExists, setShowUserExists] = useState(false);
 
     const handleUserExists = (username) => {
