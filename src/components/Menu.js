@@ -14,11 +14,14 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {Close} from '@mui/icons-material';
-import PropTypes from 'prop-types';
-export default function Menu({user}) {
+import { useNavigate } from 'react-router-dom';
+
+
+export default function Menu({ user }) {
+	const navigate = useNavigate();
 	const drawerWidth = 240;
 	const navItems = !user ? [] : ['Home', 'Map', 'Change Password', 'Update Details'];
-	const locationForNavItems = !user ? [] : ['/', 'map', 'changePassword', 'updateDetails'];
+	const locationForNavItems = !user ? [] : ['/', 'map', 'change-password', 'update-details'];
 	const [mobileOpen, setMobileOpen] = React.useState(false);
 
 	const handleDrawerToggle = () => {
@@ -65,7 +68,7 @@ export default function Menu({user}) {
 						{navItems.map((item) => (
 							<Button key={item} sx={{ color: '#000' }} onClick={
 								() => {
-									window.location.href = locationForNavItems[navItems.indexOf(item)];
+									navigate(locationForNavItems[navItems.indexOf(item)]);
 								}
 							}>
 								{item}

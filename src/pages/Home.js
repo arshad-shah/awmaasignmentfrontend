@@ -1,13 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, Button, Container} from '@mui/material';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 import * as PropTypes from 'prop-types';
+import { isTokenExpired } from '../utils/TokenService';
+import { getTokenFromStorage } from '../utils/ApiCalls';
+import {useNavigate} from 'react-router-dom';
 
-function Home({user, handleLogout, isMobile}) {
+function Home({ handleLogout, isMobile }) {
+	const navigate = useNavigate();
+	const user = getTokenFromStorage();
 	if (!user) {
-		window.location.href = '/login';
+		navigate('/login');
 	}
+
+	useEffect(() => {
+		Promise.resolve().then(async () => {
+			const isExpired = await isTokenExpired(user);
+		    //check if the token is expired
+			if (isExpired) {
+				handleLogout();
+				navigate('/login');
+			}
+		});
+
+	}, []);
 
 	return (
 		<>
@@ -18,7 +35,8 @@ function Home({user, handleLogout, isMobile}) {
 				justifyContent={'space-between'}
 			>
 				<Menu user={user}/>
-				<Container maxWidth={'md'} sx={{top:'50px', bottom:'50px'}}>
+				<Container maxWidth={'md'} sx={{ top: '50px', bottom: '50px' }}>
+					welcome
 					<h1>Advanced Web Mapping 2022</h1>
 					<h2>Assignment 2</h2>
 					<h3>Student ID: C19485866</h3>
