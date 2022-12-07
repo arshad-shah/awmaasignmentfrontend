@@ -5,7 +5,7 @@ import { isTokenExpired } from "./TokenService.js";
 
 export async function updateLocation(location) {
   try {
-    const url = `${getApiUrl()}/update_location/`;
+    const url = `${getApiUrl()}/api/update-location/`;
     //get the token from local storage
     let token = getTokenFromStorage();
     //check if the token is expired
