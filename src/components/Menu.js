@@ -61,12 +61,12 @@ export default function Menu({ user }) {
 						aria-label="open drawer"
 						edge="start"
 						onClick={handleDrawerToggle}
-						sx={{ mr: 2, display: { sm: 'none' } }}
+						sx={{ mr: 2, display: { md: 'none' } }}
 					>
 						{!mobileOpen ? <MenuIcon /> : <Close/>}
 					</IconButton>
 					): null }
-					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+					<Box sx={{ display: { xs: 'none', md: 'block' } }}>
 						{navItems.map((item) => (
 							<Button key={item} sx={{ color: '#000' }} onClick={
 								() => {
@@ -88,7 +88,7 @@ export default function Menu({ user }) {
 						keepMounted: true, // Better open performance on mobile.
 					}}
 					sx={{
-						display: { xs: 'block', sm: 'none' },
+						display: { md: 'block', lg: 'none', },
 						'& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
 					}}
 				>

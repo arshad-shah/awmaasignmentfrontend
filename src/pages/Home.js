@@ -10,9 +10,9 @@ import axios from 'axios';
 
 function Home({ handleLogout, isMobile }) {
 	const navigate = useNavigate();
-    const [token, setToken] = useState({});
+    const user = getTokenFromStorage();
+    const [token, setToken] = useState(user);
     useEffect(() => {
-        setToken(getTokenFromStorage());
 		if (!token) {
 			navigate('/login');
 		}
@@ -61,7 +61,7 @@ function Home({ handleLogout, isMobile }) {
 					<h3>Student ID: C19485866</h3>
 					<h3>Course ID: TU856</h3>
 					<h3>Course Name: Computer Science</h3>
-					<Button variant="contained" onClick={handleLogout}>Logout</Button>
+					<Button variant="contained" onClick={() => handleLogout()}>Logout</Button>
 				</Container>
 				<Footer isMobile={isMobile}/>
 			</Box>

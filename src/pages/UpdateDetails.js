@@ -62,9 +62,9 @@ function UpdateDetails({ isMobile, handleLogout }) {
 
 
 
-    const [token, setToken] = useState({});
+    const user = getTokenFromStorage();
+    const [token, setToken] = useState(user);
     useEffect(() => {
-        setToken(getTokenFromStorage());
 		if (!token) {
 			navigate('/login');
 		}

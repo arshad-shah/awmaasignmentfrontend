@@ -85,9 +85,9 @@ function ChangePassword({ isMobile, handleLogout }) {
         }
     }
 
-    const [token, setToken] = useState({});
+    const user = getTokenFromStorage();
+    const [token, setToken] = useState(user);
     useEffect(() => {
-        setToken(getTokenFromStorage());
 		if (!token) {
 			navigate('/login');
 		}
@@ -151,7 +151,6 @@ function ChangePassword({ isMobile, handleLogout }) {
                     </FormControl>
                     {handlePasswordCompare()}
                     <Button variant="contained" color="secondary" onClick={handleSubmit} fullWidth>Change Password</Button>
-                    <p style={{marginTop: '10px'}}>Don't have an account? <a href="/login">Login</a></p>
 
                 </form>
             </Box>
