@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {
@@ -7,17 +7,15 @@ import {
 	StyledEngineProvider,
 	ThemeProvider,
 	useMediaQuery,
-	useTheme
 } from '@mui/material';
-import Map from './components/Map';
-import {getTokenFromStorage, login, logout} from './utils/ApiCalls';
+import {getTokenFromStorage, logout} from './utils/ApiCalls';
 import Home from './pages/Home';
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
-import {getToken} from "./utils/TokenService";
 import MapPage from "./pages/MapPage";
 import ChangePassword from "./pages/ChangePassword";
 import UpdateDetails from './pages/UpdateDetails';
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -58,8 +56,10 @@ function App() {
 	const [user, setUser] = useState(getTokenFromStorage());
 
 	const handleLogout = () => {
+		console.log('logging out');
 		setUser(null);
 		logout();
+		window.location.reload();	
 	};
 
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
