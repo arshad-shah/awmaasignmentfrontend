@@ -10,15 +10,12 @@ import {useNavigate} from 'react-router-dom';
 function Home({ handleLogout, isMobile }) {
 	const navigate = useNavigate();
 	const user = getTokenFromStorage();
-	if (!user) {
-		navigate('/login');
-	}
 
 	useEffect(() => {
 		Promise.resolve().then(async () => {
 			const isExpired = await isTokenExpired(user);
 		    //check if the token is expired
-			if (isExpired) {
+			if (isExpired || !user) {
 				handleLogout();
 				navigate('/login');
 			}

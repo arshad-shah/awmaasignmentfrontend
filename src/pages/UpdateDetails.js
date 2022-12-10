@@ -19,9 +19,6 @@ function UpdateDetails({ isMobile, handleLogout }) {
     const navigate = useNavigate();
 
 	const user = getTokenFromStorage();
-	if (!user) {
-		navigate('/login');
-	}
 
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -69,7 +66,7 @@ function UpdateDetails({ isMobile, handleLogout }) {
 		Promise.resolve().then(async () => {
 			const isExpired = await isTokenExpired(user);
 		    //check if the token is expired
-			if (isExpired) {
+			if (isExpired || !user) {
 				handleLogout();
 				navigate('/login');
 			}

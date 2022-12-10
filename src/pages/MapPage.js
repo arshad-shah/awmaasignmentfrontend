@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Menu from "../components/Menu";
 import {Box} from "@mui/material";
 import Map from "../components/Map";
@@ -11,6 +11,12 @@ function MapPage() {
     if (!token){
         navigate('/login');
     }
+
+    useEffect(() => {
+        if (!token){
+            navigate('/login');
+        }
+    }, []);
     return (
         <Box
             display={'flex'}
