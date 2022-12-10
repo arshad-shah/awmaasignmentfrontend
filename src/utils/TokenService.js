@@ -15,7 +15,7 @@ export async function getToken(username, password) {
         const response = await axios.post(url, data);
         return response.data;
     } catch (e) {
-        console.error(e);
+        console.error(e.request.statusText);
         return null;
     }
 }
@@ -29,7 +29,7 @@ export async function isTokenExpired(token) {
         const response = await axios.post(url, data);
         return response.status === 401;
     } catch (e) {
-        console.log(e);
+        console.error(e.request.statusText);
         return true;
     }
 }
