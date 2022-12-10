@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/www.awmassignment.arshadshah.com/static/css/main.2caf059a.css",
-    "main.js": "/www.awmassignment.arshadshah.com/static/js/main.3eff2ee3.js",
-    "static/js/787.bbd1756e.chunk.js": "/www.awmassignment.arshadshah.com/static/js/787.bbd1756e.chunk.js",
-    "service-worker.js": "/www.awmassignment.arshadshah.com/service-worker.js",
-    "index.html": "/www.awmassignment.arshadshah.com/index.html",
-    "main.2caf059a.css.map": "/www.awmassignment.arshadshah.com/static/css/main.2caf059a.css.map",
-    "main.3eff2ee3.js.map": "/www.awmassignment.arshadshah.com/static/js/main.3eff2ee3.js.map",
-    "787.bbd1756e.chunk.js.map": "/www.awmassignment.arshadshah.com/static/js/787.bbd1756e.chunk.js.map"
+    "main.css": "/static/css/main.2caf059a.css",
+    "main.js": "/static/js/main.2d1f30f9.js",
+    "static/js/787.4fca4b1e.chunk.js": "/static/js/787.4fca4b1e.chunk.js",
+    "service-worker.js": "/service-worker.js",
+    "index.html": "/index.html",
+    "main.2caf059a.css.map": "/static/css/main.2caf059a.css.map",
+    "main.2d1f30f9.js.map": "/static/js/main.2d1f30f9.js.map",
+    "787.4fca4b1e.chunk.js.map": "/static/js/787.4fca4b1e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2caf059a.css",
-    "static/js/main.3eff2ee3.js"
+    "static/js/main.2d1f30f9.js"
   ]
 }
