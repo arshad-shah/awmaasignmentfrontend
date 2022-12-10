@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
     Box,
     Button,
@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
-import {getToken, isTokenExpired} from "../utils/TokenService";
-import { logout, saveToken, getTokenFromStorage } from "../utils/ApiCalls";
+import {getToken} from "../utils/TokenService";
+import { saveToken } from "../utils/ApiCalls";
 import { useNavigate } from "react-router-dom";
 
 
@@ -30,7 +30,6 @@ function Login({ isMobile, setUser }) {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [isTheTokenExpired, setIsTheTokenExpired] = useState(false);
     const handleLoginError = () => {
         if (error) {
             return (
@@ -53,20 +52,6 @@ function Login({ isMobile, setUser }) {
             setError('Invalid username or password');
         }
     }
-    useEffect(() => {
-        const token =  getTokenFromStorage();
-        if (token) {
-            //call the api to check if the token is expired
-            const isExpired = isTokenExpired(token);
-            if (isExpired) {
-                setIsTheTokenExpired(true);
-                logout();
-            }else{
-                setIsTheTokenExpired(false);
-                navigate('/');
-            }
-        }
-    } ,[]);
 
     return (
         <Box

@@ -11,14 +11,13 @@ import {
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 import {isTokenExpired, updateProfile} from "../utils/TokenService";
-import {getTokenFromStorage } from "../utils/ApiCalls";
+import { getTokenFromStorage, getRefreshTokenFromStorage,saveToken,getApiUrl } from '../utils/ApiCalls';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 function UpdateDetails({ isMobile, handleLogout }) {
     const navigate = useNavigate();
-
-	const user = getTokenFromStorage();
 
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -62,18 +61,37 @@ function UpdateDetails({ isMobile, handleLogout }) {
   }
 
 
-	useEffect(() => {
+
+    const [token, setToken] = useState({});
+    useEffect(() => {
+        setToken(getTokenFromStorage());
+		if (!token) {
+			navigate('/login');
+		}
 		Promise.resolve().then(async () => {
-			const isExpired = await isTokenExpired(user);
-		    //check if the token is expired
-			if (isExpired || !user) {
-				handleLogout();
-				navigate('/login');
-			}
+            //check if the token is expired
+            const isExpired = await isTokenExpired(token);
+            //if the token is expired, get a new one
+            if (isExpired) {
+                const refreshToken = getRefreshTokenFromStorage();
+                //send the refresh token to the server to get a new access token
+                const response = await axios.post(`${getApiUrl()}/api/token/refresh/`, {
+                    'refresh': refreshToken
+                });
+                //recreate the token
+                const newToken = {
+                    'access': response.data.access,
+                    'refresh': refreshToken
+                };
+
+                //save the new token in local storage
+                saveToken(newToken);
+                //get the new token from local storage
+                setToken(getTokenFromStorage())
+            }
 		});
 
-  }, []);
-  
+	}, []);
     return (
         <Box
             display={'flex'}
@@ -82,7 +100,7 @@ function UpdateDetails({ isMobile, handleLogout }) {
             justifyContent={'space-between'}
             alignItems={'center'}
         >
-            <Menu user={user}/>
+            <Menu user={token}/>
             <Box maxWidth={'md'} sx={{top:'100px', bottom:'50px'}} display={'flex'} flexDirection={'column'}>
                 <Typography variant={'h3'}>Change Password</Typography>
                 <form>

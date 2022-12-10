@@ -1,24 +1,46 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Button, Container} from '@mui/material';
 import Menu from '../components/Menu';
 import Footer from '../components/Footer';
 import * as PropTypes from 'prop-types';
 import { isTokenExpired } from '../utils/TokenService';
-import { getTokenFromStorage } from '../utils/ApiCalls';
-import {useNavigate} from 'react-router-dom';
+import { getTokenFromStorage, getRefreshTokenFromStorage,saveToken,getApiUrl } from '../utils/ApiCalls';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Home({ handleLogout, isMobile }) {
 	const navigate = useNavigate();
-	const user = getTokenFromStorage();
-
-	useEffect(() => {
+    const [token, setToken] = useState({});
+    useEffect(() => {
+        setToken(getTokenFromStorage());
+		if (!token) {
+			navigate('/login');
+		}
 		Promise.resolve().then(async () => {
-			const isExpired = await isTokenExpired(user);
-		    //check if the token is expired
-			if (isExpired || !user) {
-				handleLogout();
-				navigate('/login');
-			}
+            //check if the token is expired
+            const isExpired = await isTokenExpired(token);
+            //if the token is expired, get a new one
+            if (isExpired) {
+                const refreshToken = getRefreshTokenFromStorage();
+                //send the refresh token to the server to get a new access token
+                const response = await axios.post(`${getApiUrl()}/api/token/refresh/`, {
+                    'refresh': refreshToken
+								});
+								//if the response code is not 200, redirect to login
+								if (response.status !== 200) {
+									navigate('/login');
+								}
+                //recreate the token
+                const newToken = {
+                    'access': response.data.access,
+                    'refresh': refreshToken
+                };
+
+                //save the new token in local storage
+                saveToken(newToken);
+                //get the new token from local storage
+                setToken(getTokenFromStorage())
+            }
 		});
 
 	}, []);
@@ -31,7 +53,7 @@ function Home({ handleLogout, isMobile }) {
 				minHeight={'100vh'}
 				justifyContent={'space-between'}
 			>
-				<Menu user={user}/>
+				<Menu user={token}/>
 				<Container maxWidth={'md'} sx={{ top: '50px', bottom: '50px' }}>
 					welcome
 					<h1>Advanced Web Mapping 2022</h1>

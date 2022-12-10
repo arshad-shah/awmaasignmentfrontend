@@ -8,9 +8,6 @@ import { getTokenFromStorage } from "../utils/ApiCalls";
 function MapPage() {
     const navigate = useNavigate();
     const token =  getTokenFromStorage();
-    if (!token){
-        navigate('/login');
-    }
 
     useEffect(() => {
         if (!token){
