@@ -70,7 +70,7 @@ export default function Menu({ user }) {
 						{navItems.map((item) => (
 							<Button key={item} sx={{ color: '#000' }} onClick={
 								() => {
-									navigate(locationForNavItems[navItems.indexOf(item)]);
+									navigate(locationForNavItems[navItems.indexOf(item)], { replace: true });
 								}
 							}>
 								{item}
